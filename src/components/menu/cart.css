@@ -1,0 +1,56 @@
+.carrinho-compras{
+    border:1px solid #343a40!important;
+    padding: 20px;
+    border-radius: 10px;
+}
+.carrinho-compras h5, .carrinho-compras p{
+    text-align: center;
+}
+.carrinho-compras .remov{
+    border:0px;
+    font-size: 20px;
+    background-color: #343a40!important;
+    color:#FFF;
+}
+
+.addCart{
+    border:0px;
+    background-color: transparent;
+    font-size: 20px;
+}
+thead{
+    background-color: #343a40!important;
+    color: #FFF;
+}
+.finalizar{
+    border:0px;
+    font-size: 20px;
+    background-color: #343a40!important;
+    color:#FFF;
+    float: right;
+}
+.finalizar a{
+    color: #FFF;
+}
+.col-md-6{
+    width: 50%;
+    display: inline-block;
+}
+.cadastrarBtn{
+    width: 100%;
+    background-color: #343a40;
+    color: #FFF;
+    border: none;
+    font-size: 22px;
+    height: 40px;
+    margin: 10px 0px;
+}
+.cadastroUser h4, .cadastroUser label, .cadastroUser h5{
+    color: #343a40;
+}
+.cadastroUser input:focus{
+    border-color: #343a40;
+}
+.Form-Error{
+    color: red;
+}

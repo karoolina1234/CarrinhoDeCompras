@@ -1,0 +1,15 @@
+.col-md-6{
+    display: inline-block;
+}
+img{
+    width: 300px;
+}
+.addItemCart{
+    color: #FFF;
+    border:none;
+    background-color: #343a40;
+    width: 80%;
+    height: 40px;
+    border-radius: 9px;
+
+}

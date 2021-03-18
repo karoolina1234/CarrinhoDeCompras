@@ -2,23 +2,18 @@ import React from 'react'
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCashRegister, faShoppingCart, faShoppingBasket} from '@fortawesome/free-solid-svg-icons';
-import PropTypes from 'prop-types';
-import ItensCarrinhoMenu from './carrinho';
-import Button from 'react-bootstrap/Button';
-function Menu(props){
-    function calcularTotal(){
-        if(props.produtos.length === 0){
-            return '0.00';
-        }
-        let total = 0;
-        props.produtos.forEach(produto => {
-            let preco = produto.price;
-            total += parseFloat(preco) * produto.quantidade;
-        });
-        return total.toFixed(2).toString().replace('.',',');
-    }
-  
+import {useSelector, useDispatch} from 'react-redux'
+import {Link} from 'react-router-dom'
 
+function Menu(){
+    
+    const cart = useSelector((state) =>state.products.filter(item=>{
+        return item.qtd > 0
+    }))
+    const total = useSelector(state=>state.products.reduce((acc, cur)=>{
+        return acc + cur.qtd;
+       },0))
+    
     return(
         <div className = 'container'>
         <Navbar bg="dark" variant="dark">
@@ -28,29 +23,18 @@ function Menu(props){
                     <NavDropdown
                         title={
                             <div style={{display: 'inline-block'}}>
-                                <FontAwesomeIcon icon = {faShoppingCart}/>
-                                &nbsp;
-                                Carrinho
+                               <Link to="/cart"> <FontAwesomeIcon icon = {faShoppingCart} /></Link> 
+                                Carrinho {total}
                             </div>
                         }
                         drop='left'>
-                            <NavDropdown.Item href=""
-                            onClick={props.handleExibirProdutos}>
-                                <FontAwesomeIcon icon ={faShoppingBasket}/>
-                                &nbsp;
-                                <strong>Produtos</strong>
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider/>
-                            <ItensCarrinhoMenu produtos={props.produtos}/>
-                            &nbsp;
-                            <Button  variant="light" onClick={props.handleLimparCarrinho} >Limpar Carrinho</Button>
-                            <NavDropdown.Divider/>
-                            <NavDropdown.Item href="">
-                                Total: R${calcularTotal()}
-                            </NavDropdown.Item>
-                          
-                            
-                        
+                        <NavDropdown.Item >
+                        {cart.map(item=>(
+                            <>
+                            <h1>{item.name}</h1>
+                            </>
+                        ))}
+                        </NavDropdown.Item>
                         </NavDropdown>
                 </Nav>
             </Navbar.Collapse>
@@ -59,10 +43,5 @@ function Menu(props){
     );
 }
 
-Menu.proTypes = {
-    produtos: PropTypes.array.isRequired,
-    handleExibirProdutos: PropTypes.func.isRequired,
-    handleExibirCheckout: PropTypes.func.isRequired
-}
 
 export default Menu; 
